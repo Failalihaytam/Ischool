@@ -13,8 +13,127 @@ if (!isset($_SESSION['student_id'])) {
 
 <head>
     <style>
-        /* Styles CSS */
+      /* Styles CSS pour la mise en page des chapitres */
+
+      /* Style de la carte principale */
+      .card {
+        display: flex;
+        flex-direction: column;
+        width: 800px;
+        margin: 10px auto;
+        padding: 20px;
+        border: 2px solid #c4c4c4;
+        border-radius: 20px;
+        background: #D5D9EE;
+        box-shadow: 9px 9px 30px #b0b0b0,
+          -9px -9px 30px #ffffff;
+      }
+
+      /* Style du titre de la carte */
+      .card h2 {
+        font-size: 35px;
+        text-align: start;
+        font-weight: 600;
+        margin: 30px auto;
+        color: #010d24;
+        text-transform: uppercase;
+        text-shadow: 0 2px white, 0 3px #777;
+      }
+
+      /* Style du message d'erreur ou de notification */
+      .message {
+        font-size: 20px;
+        font-weight: 500;
+        padding: 25px;
+        text-align: center;
+        border-bottom: 2px solid #141D47;
+        border-radius: 25px;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Style du titre des chapitres */
+      .card h3 {
+        font-size: 24px;
+        font-weight: 600;
+        margin: 10px 40px;
+        color: #141D47;
+      }
+
+      /* Style du conteneur des chapitres */
+      .card .chapters {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 25px;
+        width: 90%;
+        margin: auto;
+      }
+
+      /* Style d'un chapitre individuel */
+      .card .chapters .chapter {
+        min-width: 260px;
+        background: #ADADAD;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+        border-radius: 20px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Style de l'en-tête d'un chapitre */
+      .chapter .head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+        margin: 10px auto;
+      }
+
+      /* Style de l'icône du chapitre */
+      .chapter .head i {
+        font-size: 28px;
+        color: #141D47;
+        background: #fff;
+        border-radius: 20px;
+        padding: 10px;
+      }
+
+      /* Style du titre du chapitre */
+      .chapter .head h4 {
+        font-size: 22px;
+        font-weight: 600;
+        color: #141D47;
+      }
+
+      /* Style du lien pour voir le PDF d'un chapitre */
+      .chapter a {
+        text-decoration: none;
+        padding: 17px 45px;
+        border-radius: 50px;
+        cursor: pointer;
+        border: 0;
+        color: #162155;
+        background-color: white;
+        box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        font-size: 15px;
+        transition: all 0.5s ease;
+        margin: 20px auto;
+      }
+
+      /* Style du survol du lien pour voir le PDF d'un chapitre */
+      .chapter a:hover {
+        letter-spacing: 3px;
+        background-color: hsl(261deg 80% 48%);
+        color: hsl(0, 0%, 100%);
+        box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+      }
     </style>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
