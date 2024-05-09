@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-// Check if the user is logged in
+// Vérifie si l'utilisateur est connecté
 if (!isset($_SESSION["email"])) {
-  // Redirect to the login page if not logged in
+  // Redirige vers la page de connexion si non connecté
   header("Location: index.html");
   exit();
 }
@@ -14,42 +14,48 @@ if (!isset($_SESSION["email"])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <?php 
-    require_once "dashbord_head.html";
+  <?php
+    require_once "dashbord_head.html"; // Inclut le contenu du head
   ?>
   <style>
+    /* Styles pour l'en-tête */
     .heading {
       width: 70%;
       margin: 200px auto;
     }
 
-      .heading h1 {
-    text-align: center;
-    font-size:70px; font-weight:700; color:#222; letter-spacing:1px;
-    text-transform: uppercase;
+    /* Styles pour le titre */
+    .heading h1 {
+      text-align: center;
+      font-size: 70px;
+      font-weight: 700;
+      color: #222;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      display: grid;
+      grid-template-columns: 1fr max-content 1fr;
+      grid-template-rows: 27px 0;
+      grid-gap: 20px;
+      align-items: center;
+    }
 
-    display: grid;
-    grid-template-columns: 1fr max-content 1fr;
-    grid-template-rows: 27px 0;
-    grid-gap: 20px;
-    align-items: center;
-}
-
-.heading h1:after,.heading h1:before {
-    content: " ";
-    display: block;
-    border-bottom: 3px solid rgb(33, 33, 212);
-    border-top: 3px solid rgb(33, 33, 212);
-    height: 20px;
-  background-color:#f8f8f8;
-}
+    /* Styles pour les lignes horizontales */
+    .heading h1:after,
+    .heading h1:before {
+      content: " ";
+      display: block;
+      border-bottom: 3px solid rgb(33, 33, 212);
+      border-top: 3px solid rgb(33, 33, 212);
+      height: 20px;
+      background-color: #f8f8f8;
+    }
   </style>
   <title>Bienvenue</title>
 </head>
 <body>
   <div class="container">
-    <?php 
-      require_once "dashbord_body.html";
+    <?php
+      require_once "dashbord_body.html"; // Inclut le contenu du body
     ?>
     <div class="main">
       <div class="topbar">
@@ -64,6 +70,6 @@ if (!isset($_SESSION["email"])) {
   </div>
 </body>
 <?php
-  require_once "dashboard_script.html";
+  require_once "dashboard_script.html"; // Inclut le script JavaScript
 ?>
 </html>
