@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-// Check if the user is logged in as a student
+// Vérifie si l'utilisateur est connecté en tant qu'étudiant
 if (!isset($_SESSION['student_id'])) {
-  header("Location: my_classes.php"); // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+  header("Location: my_classes.php"); // Redirige vers la page de connexion si l'utilisateur n'est pas connecté
   exit();
 }
 ?>
@@ -12,6 +12,7 @@ if (!isset($_SESSION['student_id'])) {
 <html lang="fr">
 
 <head>
+  <!-- Styles CSS pour la mise en forme -->
   <style>
     .card {
       display: flex;
@@ -100,6 +101,7 @@ if (!isset($_SESSION['student_id'])) {
   </style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Inclusion des ressources du tableau de bord -->
   <?php
   require_once "dashbord_head.html";
   ?>
@@ -108,6 +110,7 @@ if (!isset($_SESSION['student_id'])) {
 
 <body>
   <div class="container">
+    <!-- Inclusion du contenu du tableau de bord -->
     <?php
     require_once "dashbord_body.html";
     ?>
@@ -120,14 +123,14 @@ if (!isset($_SESSION['student_id'])) {
       <div class="card">
         <?php
 
-        // Include database connection
+        // Inclusion de la connexion à la base de données
         include_once "connection.php";
 
-        // Check if the class ID is provided in the URL
+        // Vérifie si l'identifiant de la classe est fourni dans l'URL
         if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
           $class_id = $_GET['class_id'];
 
-          // Fetch class details from database
+          // Récupère les détails de la classe depuis la base de données
           $class_query = "SELECT * FROM classes WHERE id = '$class_id'";
           $class_result = mysqli_query($conn, $class_query);
 
@@ -135,7 +138,7 @@ if (!isset($_SESSION['student_id'])) {
             $class_row = mysqli_fetch_assoc($class_result);
             echo "<h2>" . $class_row['class_name'] . "</h2>";
 
-            // Fetch and display sent messages by the student
+            // Récupère et affiche les messages envoyés par l'étudiant
             $sent_messages_query = "SELECT * FROM messages WHERE class_id = '$class_id' AND sender_id = '" . $_SESSION['student_id'] . "'";
             $sent_messages_result = mysqli_query($conn, $sent_messages_query);
 
@@ -158,7 +161,7 @@ if (!isset($_SESSION['student_id'])) {
           echo "Demande invalide.";
         }
 
-        // Close database connection
+        // Fermeture de la connexion à la base de données
         mysqli_close($conn);
         ?>
 
@@ -166,6 +169,7 @@ if (!isset($_SESSION['student_id'])) {
     </div>
   </div>
 </body>
+<!-- Inclusion des scripts JavaScript pour le tableau de bord -->
 <?php
 require_once "dashboard_script.html";
 ?>
