@@ -1,17 +1,17 @@
 <?php
 session_start();
 
-// Check if the user is logged in
+// Vérifie si l'utilisateur est connecté
 if (!isset($_SESSION["email"])) {
-  // Redirect to the login page if not logged in
+  // Redirige vers la page de connexion si l'utilisateur n'est pas connecté
   header("Location: index.html");
   exit();
 }
 
-// Include database connection
+// Inclusion de la connexion à la base de données
 include_once "connection.php";
 
-// Fetch current user information
+// Récupère les informations actuelles de l'utilisateur
 $email = $_SESSION["email"];
 $query = "SELECT id, firstname, lastname, email FROM students WHERE email = '$email'";
 $result = mysqli_query($conn, $query);
@@ -26,35 +26,36 @@ if ($result && mysqli_num_rows($result) > 0) {
   echo "Erreur lors de la récupération des informations de l'utilisateur.";
 }
 
-// Update user information if form is submitted
+// Met à jour les informations de l'utilisateur si le formulaire est soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $newFirstname = $_POST['firstname'];
   $newLastname = $_POST['lastname'];
   $newEmail = $_POST['email'];
   $newPassword = $_POST['password'];
 
-  // Validate and update the database
-  // Note: You should add proper validation and hashing for the password
+  // Valide et met à jour la base de données
   $hashed_password = md5($newPassword);
   $updateQuery = "UPDATE students SET firstname = '$newFirstname', lastname = '$newLastname', email = '$newEmail', password = '$hashed_password' WHERE id = '$id'";
   $updateResult = mysqli_query($conn, $updateQuery);
 
   if ($updateResult) {
     header("Location: profile.php");
-    // Update session email if email is changed
+    // Met à jour l'email de session si l'email est modifié
     $_SESSION["email"] = $newEmail;
   } else {
     echo "Erreur lors de la mise à jour du profil.";
   }
 }
 
-// Close database connection
+// Fermeture de la connexion à la base de données
 mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+  <!-- Styles CSS pour la mise en forme -->
   <style>
     .card {
       width: 800px;
@@ -65,6 +66,7 @@ mysqli_close($conn);
       background: #d8dfed;
       box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
     }
+
     .card h2 {
       font-size: 45px;
       text-align: center;
@@ -73,6 +75,7 @@ mysqli_close($conn);
       color: #010d24;
       text-transform: uppercase;
     }
+
     .card form {
       display: flex;
       align-items: center;
@@ -113,6 +116,7 @@ mysqli_close($conn);
     .card form .inputs input:focus {
       background: #8e95ad;
     }
+
     .card form .submit {
       text-decoration: none;
       margin: 8px auto;
@@ -138,14 +142,17 @@ mysqli_close($conn);
   </style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Inclusion des ressources du tableau de bord -->
   <?php
     require_once "dashbord_head.html";
   ?>
   <title>Modifier le Profil</title>
 </head>
+
 <body>
   <div class="container">
-    <?php 
+    <!-- Inclusion du contenu du tableau de bord -->
+    <?php
       require_once "dashbord_body.html";
     ?>
     <div class="main">
@@ -155,29 +162,29 @@ mysqli_close($conn);
         </div>
       </div>
       <div class="card">
-      <h2>Modifier le Profil</h2>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-      <div class="inputs">
-      <label for="firstname">Prénom: </label>
-      <input type="text" id="firstname" name="firstname" value="<?php echo $firstname; ?>" required><br>
+        <h2>Modifier le Profil</h2>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+          <div class="inputs">
+            <label for="firstname">Prénom: </label>
+            <input type="text" id="firstname" name="firstname" value="<?php echo $firstname; ?>" required><br>
 
-      <label for="lastname">Nom: </label>
-      <input type="text" id="lastname" name="lastname" value="<?php echo $lastname; ?>" required><br>
+            <label for="lastname">Nom: </label>
+            <input type="text" id="lastname" name="lastname" value="<?php echo $lastname; ?>" required><br>
 
-      <label for="email">Email: </label>
-      <input type="email" id="email" name="email" value="<?php echo $email; ?>" required><br>
+            <label for="email">Email: </label>
+            <input type="email" id="email" name="email" value="<?php echo $email; ?>" required><br>
 
-      <label for="password">Mot de passe: </label>
-      <input type="password" id="password" name="password" required><br>
-      </div>
-      <input type="submit" value="Mettre à jour le Profil" class="submit">
-    </form>
+            <label for="password">Mot de passe: </label>
+            <input type="password" id="password" name="password" required><br>
+          </div>
+          <input type="submit" value="Mettre à jour le Profil" class="submit">
+        </form>
       </div>
     </div>
-    
   </div>
 </body>
-<?php 
+<!-- Inclusion des scripts JavaScript pour le tableau de bord -->
+<?php
   require_once "dashboard_script.html";
 ?>
 </html>
