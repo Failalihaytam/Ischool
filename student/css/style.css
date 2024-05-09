@@ -1,52 +1,61 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-* {
+  /* Importation de la police Google Fonts */
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+  /* Réinitialisation des styles par défaut */
+  * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-}
+    font-family: "Poppins", sans-serif; /* Utilisation de la police Poppins */
+  }
 
-body {
+  /* Style du corps de la page */
+  body {
     background-color: #c9d6ff;
-    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+    background: linear-gradient(to right, #e2e2e2, #c9d6ff); /* Dégradé de couleur en arrière-plan */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
-}
+    height: 100vh; /* Hauteur de la vue à 100% */
+  }
 
-.container {
+  /* Style du conteneur principal */
+  .container {
     background-color: #fff;
     border-radius: 30px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35); /* Ombre portée */
     position: relative;
     overflow: hidden;
     width: 768px;
-    max-width: 100%;
-    min-height: 480px;
-}
+    max-width: 100%; /* Largeur maximale de 100% pour une mise en page flexible */
+    min-height: 480px; /* Hauteur minimale */
+  }
 
-.container p {
+  /* Style du paragraphe dans le conteneur */
+  .container p {
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0.3px;
     margin: 20px 0;
-}
+  }
 
-.container span {
+  /* Style du texte en surbrillance */
+  .container span {
     font-size: 12px;
-}
+  }
 
-.container a {
+  /* Style des liens */
+  .container a {
     color: #333;
     font-size: 13px;
     text-decoration: none;
     margin: 15px 0 10px;
-}
+  }
 
-.container button {
+  /* Style des boutons */
+  .container button {
     background-color: rgb(33, 33, 212);
     color: #fff;
     font-size: 12px;
@@ -58,14 +67,16 @@ body {
     text-transform: uppercase;
     margin-top: 10px;
     cursor: pointer;
-}
+  }
 
-.container button.hidden {
+  /* Style des boutons cachés */
+  .container button.hidden {
     background-color: transparent;
     border-color: #fff;
-}
+  }
 
-.container form {
+  /* Style du formulaire dans le conteneur */
+  .container form {
     background-color: #fff;
     display: flex;
     align-items: center;
@@ -73,9 +84,10 @@ body {
     flex-direction: column;
     padding: 0 40px;
     height: 100%;
-}
+  }
 
-.container input {
+  /* Style du champ de saisie */
+  .container input {
     background-color: #eee;
     border: none;
     margin: 8px 0;
@@ -83,60 +95,66 @@ body {
     font-size: 13px;
     border-radius: 8px;
     width: 100%;
-    outline: none;
-}
+    outline: none; /* Suppression du contour par défaut */
+  }
 
-.form-container {
+  /* Style des conteneurs de formulaire (connexion et inscription) */
+  .form-container {
     position: absolute;
     top: 0;
     height: 100%;
     transition: all 0.6s ease-in-out;
-}
+  }
 
-.sign-in {
+  /* Style du conteneur de connexion */
+  .sign-in {
     left: 0;
     width: 50%;
     z-index: 2;
-}
+  }
 
-.container.active .sign-in {
+  /* Activation du conteneur de connexion */
+  .container.active .sign-in {
     transform: translateX(100%);
-}
+  }
 
-.sign-up {
+  /* Style du conteneur d'inscription */
+  .sign-up {
     left: 0;
     width: 50%;
     opacity: 0;
     z-index: 1;
-}
+  }
 
-.container.active .sign-up {
+  /* Activation du conteneur d'inscription */
+  .container.active .sign-up {
     transform: translateX(100%);
     opacity: 1;
     z-index: 5;
-    animation: move 0.6s;
-}
+    animation: move 0.6s; /* Animation lors du changement de conteneur */
+  }
 
-@keyframes move {
-
+  /* Animation de transition */
+  @keyframes move {
     0%,
     49.99% {
-        opacity: 0;
-        z-index: 1;
+      opacity: 0;
+      z-index: 1;
     }
-
     50%,
     100% {
-        opacity: 1;
-        z-index: 5;
+      opacity: 1;
+      z-index: 5;
     }
-}
+  }
 
-.social-links {
+  /* Style des liens sociaux */
+  .social-links {
     margin: 20px 0;
-}
+  }
 
-.social-links a {
+  /* Style des icônes des liens sociaux */
+  .social-links a {
     border: 1px solid #ccc;
     border-radius: 20%;
     display: inline-flex;
@@ -145,9 +163,10 @@ body {
     margin: 0 3px;
     width: 40px;
     height: 40px;
-}
+  }
 
-.toggle-container {
+  /* Style du conteneur de bascule (connexion/inscription) */
+  .toggle-container {
     position: absolute;
     top: 0;
     left: 50%;
@@ -157,14 +176,16 @@ body {
     transition: all 0.6s ease-in-out;
     border-radius: 150px 0 0 100px;
     z-index: 1000;
-}
+  }
 
-.container.active .toggle-container {
+  /* Activation du conteneur de bascule */
+  .container.active .toggle-container {
     transform: translateX(-100%);
     border-radius: 0 150px 100px 0;
-}
+  }
 
-.toggle {
+  /* Style du bouton de bascule */
+  .toggle {
     background: rgb(33, 33, 212);
     height: 100%;
     color: #fff;
@@ -174,13 +195,15 @@ body {
     width: 200%;
     transform: translateX(0);
     transition: all 0.6s ease-in-out;
-}
+  }
 
-.container.active .toggle {
+  /* Activation du bouton de bascule */
+  .container.active .toggle {
     transform: translateX(50%);
-}
+  }
 
-.toggle-panel {
+  /* Style du panneau de bascule (connexion/inscription) */
+  .toggle-panel {
     position: absolute;
     width: 50%;
     height: 100%;
@@ -193,22 +216,26 @@ body {
     top: 0;
     transform: translateX(0);
     transition: all 0.6s ease-in-out;
-}
+  }
 
-.toggle-left {
+  /* Style du panneau de bascule vers la gauche (connexion) */
+  .toggle-left {
     transform: translateX(-200%);
-}
+  }
 
-.container.active .toggle-left {
+  /* Activation du panneau de bascule vers la gauche */
+  .container.active .toggle-left {
     transform: translateX(0);
-}
+  }
 
-.toggle-right {
+  /* Style du panneau de bascule vers la droite (inscription) */
+  .toggle-right {
     right: 0;
     transform: translateX(0);
-}
+  }
 
-.container.active .toggle-right {
+  /* Activation du panneau de bascule vers la droite */
+  .container.active .toggle-right {
     transform: translateX(200%);
-}
+  }
 
