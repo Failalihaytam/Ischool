@@ -1,39 +1,39 @@
 <?php
-// Check if the form is submitted
+// Vérifie si le formulaire est soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Include database connection
+    // Inclut la connexion à la base de données
     include_once "connection.php";
 
-    // Get form data
+    // Récupère les données du formulaire
     $first_name = $_POST["firstname"];
     $last_name = $_POST["lastname"];
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    // Validate and sanitize inputs
+    // Valide et filtre les entrées
     $first_name = filter_var($first_name, FILTER_SANITIZE_STRING);
     $last_name = filter_var($last_name, FILTER_SANITIZE_STRING);
     $email = filter_var($email, FILTER_SANITIZE_EMAIL);
 
-    // Hash the password
+    // Hash le mot de passe
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    // Insert user data into the database
+    // Insère les données utilisateur dans la base de données
     $query = "INSERT INTO students (firstName, lastName, email, password) VALUES ('$first_name', '$last_name', '$email', '$hashed_password')";
     $result = mysqli_query($conn, $query);
 
     if ($result) {
-        // Redirect to welcome page after successful sign-up
+        // Redirige vers la page d'accueil après l'inscription réussie
         header("Location: index.html");
         exit();
     } else {
-        // Handle errors
-        echo "Error: Unable to sign up. Please try again later.";
-        // Log detailed error message (optional)
-        error_log("Database error: " . mysqli_error($conn));
+        // Gère les erreurs
+        echo "Erreur : Impossible de s'inscrire. Veuillez réessayer ultérieurement.";
+        // Journalise les informations d'erreur détaillées (facultatif)
+        error_log("Erreur de base de données : " . mysqli_error($conn));
     }
 
-    // Close database connection
+    // Ferme la connexion à la base de données
     mysqli_close($conn);
 }
 ?>
