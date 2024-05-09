@@ -21,17 +21,17 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
     if ($class_result && mysqli_num_rows($class_result) > 0) {
         $class_row = mysqli_fetch_assoc($class_result);
         echo "<h2>" . $class_row['class_name'] . "</h2>";
-        echo "<p><strong>Description:</strong> " . $class_row['description'] . "</p>";
+        echo "<p><strong>Description :</strong> " . $class_row['description'] . "</p>";
 
         // Link to My Students page
-        echo "<a href='preview_chapters.php?class_id=" . $class_row['id'] . "'>Preview Chapters</a><br>";
-        echo "<a href='announcements.php?class_id=" . $class_row['id'] . "'>Announcements</a><br>";
+        echo "<a href='preview_chapters.php?class_id=" . $class_row['id'] . "'>Chapitres</a><br>";
+        echo "<a href='announcements.php?class_id=" . $class_row['id'] . "'>Annonces</a><br>";
         echo "<a href='messages.php?class_id=" . $class_row['id'] . "'>Messages</a><br>";
     } else {
-        echo "Class not found or you don't have permission to view this class.";
+        echo "Cours non trouvé ou vous n'avez pas la permission de voir ce cours.";
     }   
 } else {
-    echo "Invalid request.";
+    echo "Requête invalide.";
 }
 
 // Close database connection

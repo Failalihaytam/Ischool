@@ -23,20 +23,20 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
         echo "<h2>" . $class_row['class_name'] . "</h2>";
 
         // Display form for sending messages
-        echo "<h3>Send a Message to the Teacher</h3>";
+        echo "<h3>Envoyer un Message à l'Enseignant</h3>";
         echo "<form action='send_message.php' method='post'>";
         echo "<input type='hidden' name='class_id' value='" . $class_row['id'] . "'>";
-        echo "<textarea name='message' placeholder='Type your message here' required></textarea><br>";
-        echo "<input type='submit' value='Send Message'>";
+        echo "<textarea name='message' placeholder='Tapez votre message ici' required></textarea><br>";
+        echo "<input type='submit' value='Envoyer le Message'>";
         echo "</form>";
-        echo "<a href='sent_messages.php?class_id=" . $class_row['id'] . "'>Sent Messages</a><br>";
-        echo "<a href='inbox.php?class_id=" . $class_row['id'] . "'>Inbox</a><br>";
+        echo "<a href='sent_messages.php?class_id=" . $class_row['id'] . "'>Messages Envoyés</a><br>";
+        echo "<a href='inbox.php?class_id=" . $class_row['id'] . "'>Boîte de Réception</a><br>";
 
     } else {
-        echo "Class not found or you don't have permission to view this class.";
+        echo "Cours non trouvé ou vous n'avez pas la permission de voir ce cours.";
     }
 } else {
-    echo "Invalid request.";
+    echo "Requête invalide.";
 }
 
 // Close database connection

@@ -28,21 +28,21 @@ if (mysqli_num_rows($class_result) > 0) {
         if ($detail_result && mysqli_num_rows($detail_result) > 0) {
             $class_row = mysqli_fetch_assoc($detail_result);
             echo "<h3>" . $class_row['class_name'] . "</h3>";
-            echo "<p><strong>Teacher:</strong> " . getTeacherName($class_row['teacher_id'], $conn) . "</p>";
-            echo "<p><strong>Description:</strong> " . $class_row['description'] . "</p>";
-            echo "<p><strong>Prerequisites:</strong> " . $class_row['pre_requirements'] . "</p>";
+            echo "<p><strong>Enseignant :</strong> " . getTeacherName($class_row['teacher_id'], $conn) . "</p>";
+            echo "<p><strong>Description :</strong> " . $class_row['description'] . "</p>";
+            echo "<p><strong>Prérequis :</strong> " . $class_row['pre_requirements'] . "</p>";
             echo "<form method='post' action='enroll.php'>";
             echo "<input type='hidden' name='class_id' value='" . $class_row['id'] . "'>";
-            echo "<input type='submit' value='Enroll'>";
+            echo "<input type='submit' value=\"S'inscrire\">";
             echo "</form>";
         } else {
-            echo "Class not found.";
+            echo "Cours introuvable.";
         }
     } else {
-        echo "Invalid request.";
+        echo "Requête invalide.";
     }
 } else {
-    echo "No classes available for enrollment.";
+    echo "Aucun cours disponible pour l'inscription.";
 }
 
 // Function to get teacher name
@@ -54,7 +54,7 @@ function getTeacherName($teacher_id, $conn) {
         $row = mysqli_fetch_assoc($result);
         return $row['firstName'] . " " . $row['lastName'];
     } else {
-        return "Unknown Teacher";
+        return "Enseignant inconnu";
     }
 }
 

@@ -29,23 +29,23 @@ if (isset($_GET['class_id'])) {
 
         // Display chapters
         if (mysqli_num_rows($chapters_result) > 0) {
-            echo "<h3>Chapters</h3>";
+            echo "<h3>Chapitres</h3>";
             while ($chapter_row = mysqli_fetch_assoc($chapters_result)) {
                 if ($chapter_row['hidden'] == 0) {
                     echo "<div>";
                     echo "<h4>" . $chapter_row['chapter_name'] . "</h4>";
-                    echo "<a href='" .'./../teacher/'. $chapter_row['file_path'] . "' target='_blank'>View PDF</a>";
+                    echo "<a href='" .'./../teacher/'. $chapter_row['file_path'] . "' target='_blank'>Voir le PDF</a>";
                     echo "</div>";
                 }
             }
         } else {
-            echo "No chapters available.";
+            echo "Aucun chapitre disponible.";
         }
     } else {
-        echo "Class not found.";
+        echo "Cours non trouvé.";
     }
 } else {
-    echo "Invalid request.";
+    echo "Requête invalide.";
 }
 
 // Close database connection

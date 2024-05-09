@@ -24,15 +24,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['class_id']) && isset($
         if (mysqli_stmt_execute($stmt)) {
             header("Location: messages.php?class_id=" .$class_id);
         } else {
-            echo "Error sending message: " . mysqli_stmt_error($stmt);
+            echo "Erreur lors de l'envoi du message : " . mysqli_stmt_error($stmt);
         }
         mysqli_stmt_close($stmt);
     } else {
-        echo "Error preparing statement: " . mysqli_error($conn);
+        echo "Erreur de préparation de la requête : " . mysqli_error($conn);
     }
      
 } else {
-    echo "Invalid request.";
+    echo "Requête invalide.";
 }
 
 // Close database connection

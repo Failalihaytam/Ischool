@@ -22,12 +22,35 @@ $result = mysqli_query($conn, $query);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?php
+    require_once "dashbord_head.html";
+    ?>
   <title>Delete Requests</title>
+  <style>
+    .card {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
 
 </head>
 <body>
   <div class="container">
-    <h2>Delete Requests</h2>
+    <?php
+    require_once "dashbord_body.html";
+    ?>
+    <div class="main">
+      <div class="topbar">
+        <div class="toggle">
+          <ion-icon name="menu-outline"></ion-icon>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Delete Requests</h2>
     <table>
       <thead>
         <tr>
@@ -55,7 +78,12 @@ $result = mysqli_query($conn, $query);
       </tbody>
     </table>
 
-    <a href="welcome.php">Back to Dashboard</a>
+    </div>
+    
   </div>
 </body>
+<?php
+  require_once "dashboard_script.html";
+?>
+
 </html>

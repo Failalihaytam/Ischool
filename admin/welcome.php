@@ -1,81 +1,73 @@
 <?php
 session_start();
 
+
 // Check if the user is logged in
 if (!isset($_SESSION["username"])) {
   // Redirect to the login page if not logged in
   header("Location: admin_login.php");
   exit();
 }
+
+
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome Admin</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <?php
+    require_once "dashbord_head.html";
+  ?>
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    .heading {
+      width: 70%;
+      margin: 200px auto;
     }
 
-    .container {
-      max-width: 900px;
-      margin: 150px auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-    .dashboard-links {
-      display: flex;
-      flex-direction: column;
-    }
+      .heading h1 {
+    text-align: center;
+    font-size:70px; font-weight:700; color:#222; letter-spacing:1px;
+    text-transform: uppercase;
 
-    h2 {
-      margin-bottom: 20px;
-      text-align: center;
-    }
+    display: grid;
+    grid-template-columns: 1fr max-content 1fr;
+    grid-template-rows: 27px 0;
+    grid-gap: 20px;
+    align-items: center;
+}
 
-    p {
-      margin-bottom: 10px;
-    }
-
-    .logout {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    .logout a {
-      color: #f44336;
-      text-decoration: none;
-    }
-
-    .logout a:hover {
-      text-decoration: underline;
-    }
+.heading h1:after,.heading h1:before {
+    content: " ";
+    display: block;
+    border-bottom: 3px solid #2a2185;
+    border-top: 3px solid #2a2185;
+    height: 20px;
+  background-color:#f8f8f8;
+}
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Welcome Admin</h2>
-    <p>You are now logged in as <?php echo $_SESSION["username"]; ?>.</p>
-    <!-- Add your admin dashboard content here -->
-
-    <div class="dashboard-links">
-      <a href="delete_requests.php">View Delete Requests</a>
-      <a href="teachers.php">View Teachers</a>
-      <a href="students.php">View Students</a>
-      <a href="classes.php">View Classes</a>
-
-    </div>
-
-    <div class="logout">
-      <a href="logout.php">Logout</a>
+    <?php
+      require_once "dashbord_body.html";
+    ?>
+    <div class="main">
+      <div class="topbar">
+        <div class="toggle">
+          <ion-icon name="menu-outline"></ion-icon>
+        </div>
+      </div>
+      <div class="heading">
+        <h1>Bienvenu</h1>
+      </div>
     </div>
   </div>
 </body>
+<?php
+  require_once "dashboard_script.html";
+?>
 </html>
+
 

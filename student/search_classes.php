@@ -13,15 +13,15 @@ if (isset($_GET['search'])) {
 
     // Display search results as links to enroll
     if ($search_result && mysqli_num_rows($search_result) > 0) {
-        echo "<h2>Search Results</h2>";
+        echo "<h2>Résultats de la recherche</h2>";
         while ($row = mysqli_fetch_assoc($search_result)) {
             echo "<a href='enroll_page.php?class_id=" . $row['id'] . "'>" . $row['class_name'] . "</a><br>";
         }
     } else {
-        echo "No results found.";
+        echo "Aucun résultat trouvé.";
     }
 } else {
-    echo "No search term provided.";
+    echo "Aucun terme de recherche fourni.";
 }
 
 // Close database connection

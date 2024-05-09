@@ -3,12 +3,11 @@ session_start();
 
 // Check if the user is logged in as a student
 if (!isset($_SESSION['student_id'])) {
-    header("Location: my_classes.php"); // Redirect to login page if not logged in
+    header("Location: my_classes.php"); // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
     exit();
 }
 
 include_once "connection.php";
-
 
 // Check if the class ID is provided in the URL
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
@@ -24,20 +23,18 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
     if ($messages_result && mysqli_num_rows($messages_result) > 0) {
         while ($row = mysqli_fetch_assoc($messages_result)) {
             echo "<div style='margin: 50px 20px;'>";
-            echo "<p><strong>Your Message:</strong> " . $row['message_content'] . "</p>";
-            echo "<strong>Sent at: " . $row['sent_at'] ."</strong>";
-            echo "<p><strong>Teacher's Reply:</strong> " . $row['reply_message'] . "</p>";
-            echo "<strong>Replied at: " . $row['replied_at'] ."</strong>";
+            echo "<p><strong>Votre message :</strong> " . $row['message_content'] . "</p>";
+            echo "<strong>Envoyé à : " . $row['sent_at'] ."</strong>";
+            echo "<p><strong>Réponse du professeur :</strong> " . $row['reply_message'] . "</p>";
+            echo "<strong>Répondu à : " . $row['replied_at'] ."</strong>";
             echo "</div>";
         }
     } else {
-        echo "No messages or replies found.";
+        echo "Aucun message ou réponse trouvé.";
     }
 } else {
-    echo "Invalid request.";
+    echo "Requête invalide.";
 }
-
-
 
 // Close database connection
 mysqli_close($conn);

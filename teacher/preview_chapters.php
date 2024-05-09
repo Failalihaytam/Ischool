@@ -23,7 +23,7 @@ if (isset($_GET['class_id'])) {
             }
             else
             {
-                echo "<h3>" . $chapter_row['chapter_name'] . " (hidden)</h3>";
+                echo "<h3>" . $chapter_row['chapter_name'] . " (Invisible)</h3>";
             }
 
             echo "<a href='" . $chapter_row['file_path'] . "' target='_blank'>Afficher le PDF</a><br/>"; // Link to view PDF
@@ -33,7 +33,7 @@ if (isset($_GET['class_id'])) {
             echo "<option value='1'>Rendre Invisible</option>";
             echo "</select>";
             echo "<input type='hidden' name='class_id' value='" . $class_id . "'>"; // Hidden input for class ID
-            echo "<input type='submit' value='Update'>";
+            echo "<input type='submit' value='Appliquer'>";
             echo "<a href='delete_chapter.php?chapter_id=" . $chapter_row['id'] . "&class_id=".$class_id."'>Supprimer</a><br>";
             echo "<a href='update_chapter.php?chapter_id=" . $chapter_row['id'] . "&class_id=".$class_id."'>Modifier</a><br>";
             echo "</div>";

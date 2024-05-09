@@ -14,16 +14,23 @@ include_once "connection.php";
 $class_query = "SELECT * FROM classes";
 $class_result = mysqli_query($conn, $class_query);
 
+// Check if query execution was successful
+if (!$class_result) {
+    // Handle query error
+    echo "Erreur : " . mysqli_error($conn);
+    exit();
+}
+
 // Display available classes as links
 if (mysqli_num_rows($class_result) > 0) {
-    echo "<h2>Available Classes for Enrollment</h2>";
+    echo "<h2>Cours disponibles pour l'inscription</h2>";
     echo "<div>";
     
     // Search form
     echo "<form action='search_classes.php' method='GET'>";
-    echo "<label for='search'>Search:</label>";
-    echo "<input type='text' id='search' name='search' placeholder='Search by name or keywords'>";
-    echo "<input type='submit' value='Search'>";
+    echo "<label for='search'>Recherche :</label>";
+    echo "<input type='text' id='search' name='search' placeholder='Rechercher par nom ou mots-clés'>";
+    echo "<input type='submit' value='Rechercher'>";
     echo "</form>";
     
     while ($class_row = mysqli_fetch_assoc($class_result)) {
@@ -31,7 +38,7 @@ if (mysqli_num_rows($class_result) > 0) {
     }
     echo "</div>";
 } else {
-    echo "No classes available for enrollment.";
+    echo "Aucun cours disponible pour l'inscription.";
 }
 
 // Close database connection

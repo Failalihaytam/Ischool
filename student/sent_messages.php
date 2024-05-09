@@ -3,7 +3,7 @@ session_start();
 
 // Check if the user is logged in as a student
 if (!isset($_SESSION['student_id'])) {
-    header("Location: my_classes.php"); // Redirect to login page if not logged in
+    header("Location: my_classes.php"); // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
     exit();
 }
 
@@ -27,21 +27,21 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
         $sent_messages_result = mysqli_query($conn, $sent_messages_query);
 
         if ($sent_messages_result && mysqli_num_rows($sent_messages_result) > 0) {
-            echo "<h3>Sent Messages</h3>";
+            echo "<h3>Messages envoyés</h3>";
             while ($sent_message_row = mysqli_fetch_assoc($sent_messages_result)) {
                 echo "<div>";
-                echo "<p><strong>Sent:</strong> " . $sent_message_row['sent_at'] . "</p>";
-                echo "<p><strong>Message:</strong> " . $sent_message_row['message_content'] . "</p>";
+                echo "<p><strong>Envoyé :</strong> " . $sent_message_row['sent_at'] . "</p>";
+                echo "<p><strong>Message :</strong> " . $sent_message_row['message_content'] . "</p>";
                 echo "</div>";
             }
         } else {
-            echo "<p>No messages sent yet.</p>";
+            echo "<p>Aucun message n'a encore été envoyé.</p>";
         }
     } else {
-        echo "Class not found or you don't have permission to view this class.";
+        echo "Classe non trouvée ou vous n'avez pas l'autorisation de voir cette classe.";
     }
 } else {
-    echo "Invalid request.";
+    echo "Demande invalide.";
 }
 
 // Close database connection

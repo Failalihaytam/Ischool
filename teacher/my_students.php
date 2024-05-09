@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
 
     if ($class_result && mysqli_num_rows($class_result) > 0) {
         $class_row = mysqli_fetch_assoc($class_result);
-        echo "<h2>Les étudiants inscrits à cette classe" . $class_row['class_name'] . "</h2>";
+        echo "<h2>Les étudiants inscrits à ce cours " . $class_row['class_name'] . "</h2>";
 
         // Fetch enrolled students for the class from database
         $enrolled_query = "SELECT students.id, students.firstName, students.lastName FROM enrollment INNER JOIN students ON enrollment.student_id = students.id WHERE enrollment.class_id = '$class_id'";
@@ -29,10 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
         // Display enrolled students as links
         if (mysqli_num_rows($enrolled_result) > 0) {
             while ($enrolled_row = mysqli_fetch_assoc($enrolled_result)) {
-                echo "<a href='student_details.php?student_id=" . $enrolled_row['id'] . "'>" . $enrolled_row['firstName'] . " " . $enrolled_row['lastName'] . "</a><br>";
+                echo "<a href=''>" . $enrolled_row['firstName'] . " " . $enrolled_row['lastName'] . "</a><br>";
             }
         } else {
-            echo "Aucun élève inscrit dans cette classe.";
+            echo "Aucun élève inscrit dans ce cours.";
         }
     } else {
         echo "Classe introuvable ou vous n'êtes pas autorisé à voir les élèves de cette classe.";

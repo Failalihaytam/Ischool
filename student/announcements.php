@@ -21,11 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
     if ($class_result && mysqli_num_rows($class_result) > 0) {
         $class_row = mysqli_fetch_assoc($class_result);
         echo "<!DOCTYPE html>";
-        echo "<html lang='en'>";
+        echo "<html lang='fr'>";
         echo "<head>";
         echo "<meta charset='UTF-8'>";
         echo "<meta name='viewport' content='width=device-width, initial-scale=1.0'>";
-        echo "<title>" . $class_row['class_name'] . " Announcements</title>";
+        echo "<title>Annonces de " . $class_row['class_name'] . "</title>";
         echo "<style>";
         echo "body { font-family: Arial, sans-serif; background-color: #f2f2f2; }";
         echo ".container { max-width: 800px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }";
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
         echo "</head>";
         echo "<body>";
         echo "<div class='container'>";
-        echo "<h2>" . $class_row['class_name'] . " Announcements</h2>";
+        echo "<h2>Annonces de " . $class_row['class_name'] . "</h2>";
 
         // Fetch announcements for the specified class ID
         $announcements_query = "SELECT * FROM announcements WHERE class_id = '$class_id'";
@@ -47,22 +47,22 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
         if ($announcements_result && mysqli_num_rows($announcements_result) > 0) {
             while ($announcement_row = mysqli_fetch_assoc($announcements_result)) {
                 echo "<div class='announcement'>";
-                echo "<p><strong>Posted:</strong> <span class='posted'>" . $announcement_row['created_at'] . "</span></p>";
+                echo "<p><strong>Publié :</strong> <span class='posted'>" . $announcement_row['created_at'] . "</span></p>";
                 echo "<p>" . $announcement_row['announcement'] . "</p>";
                 echo "</div>";
             }
         } else {
-            echo "<p>No announcements yet.</p>";
+            echo "<p>Aucune annonce pour le moment.</p>";
         }
 
         echo "</div>"; // Close container
         echo "</body>";
         echo "</html>";
     } else {
-        echo "Class not found or you don't have permission to view announcements for this class.";
+        echo "Cours non trouvé ou vous n'avez pas la permission de voir les annonces pour ce cours.";
     }   
 } else {
-    echo "Invalid request.";
+    echo "Requête invalide.";
 }
 
 // Close database connection
