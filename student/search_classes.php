@@ -90,7 +90,7 @@
     <?php
     require_once "dashbord_head.html";
     ?>
-    <title>classes search</title>
+    <title>Cours</title>
 </head>
 
 <body>
