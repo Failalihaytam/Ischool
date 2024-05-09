@@ -1,47 +1,45 @@
 <?php
 session_start();
 
-// Check if the form is submitted
+// Vérifie si le formulaire est soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // Include database connection
+  // Inclusion de la connexion à la base de données
   include_once "connection.php";
 
-  // Get form data
+  // Récupère les données du formulaire
   $username_email = $_POST["email"];
   $password = $_POST["password"];
 
-  // Validate and sanitize inputs (you can add more validation here)
+  // Valide et assainit les entrées (vous pouvez ajouter plus de validation ici)
   $username_email = filter_var($username_email, FILTER_SANITIZE_STRING);
 
-  // Check if the username/email and password match in the database
+  // Vérifie si le nom d'utilisateur/email et le mot de passe correspondent dans la base de données
   $query = "SELECT * FROM students WHERE email='$username_email' AND password='".md5($password)."'";
   $result = mysqli_query($conn, $query);
   $count = mysqli_num_rows($result);
 
   if ($count == 1) {
-
     $row = mysqli_fetch_array($result);
     $student_id = $row['id'];
-    // Set session variables
+    // Définit les variables de session
     $_SESSION["email"] = $username_email;
     $_SESSION["student_id"] = $student_id;
 
-    // Redirect to welcome page after successful login
+    // Redirige vers la page de bienvenue après une connexion réussie
     header("Location: welcome.php");
     exit();
   } else {
     echo "<div class='message'>
-      <span>Invalid username or password</span>
+      <span>Nom d'utilisateur ou mot de passe incorrect</span>
     </div>";
   }
 
-  // Close database connection
+  // Ferme la connexion à la base de données
   mysqli_close($conn);
 }
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
   <style>
@@ -69,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css" />
-    <title>Error</title>
+    <title>Erreur</title>
 </head>
 
 <body>
@@ -85,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </form>
         </div>
         <div class="form-container sign-in">
-            <form action="login.php" method="post">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <h1>Se connecter</h1>
                 <input type="email" placeholder="Email" name="email" required/>
                 <input type="password" placeholder="Mot de passe" name="password" required/>
