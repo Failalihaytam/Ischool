@@ -1,20 +1,20 @@
 <?php
 session_start();
 
-// Check if the user is logged in as a student
+// Vérifie si l'utilisateur est connecté en tant qu'étudiant
 if (!isset($_SESSION['student_id'])) {
     header("Location: my_classes.php"); // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
     exit();
 }
 
-// Include database connection
+// Inclut la connexion à la base de données
 include_once "connection.php";
 
-// Check if the class ID is provided in the URL
+// Vérifie si l'ID de classe est fourni dans l'URL
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
     $class_id = $_GET['class_id'];
 
-    // Fetch class details from database
+    // Récupère les détails de la classe depuis la base de données
     $class_query = "SELECT * FROM classes WHERE id = '$class_id'";
     $class_result = mysqli_query($conn, $class_query);
 
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
         $class_row = mysqli_fetch_assoc($class_result);
         echo "<h2>" . $class_row['class_name'] . "</h2>";
 
-        // Fetch and display sent messages by the student
+        // Récupère et affiche les messages envoyés par l'étudiant
         $sent_messages_query = "SELECT * FROM messages WHERE class_id = '$class_id' AND sender_id = '" . $_SESSION['student_id'] . "'";
         $sent_messages_result = mysqli_query($conn, $sent_messages_query);
 
@@ -38,12 +38,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
             echo "<p>Aucun message n'a encore été envoyé.</p>";
         }
     } else {
-        echo "Classe non trouvée ou vous n'avez pas l'autorisation de voir cette classe.";
+        echo "Cours non trouvée ou vous n'avez pas l'autorisation de voir ce cours.";
     }
 } else {
     echo "Demande invalide.";
 }
 
-// Close database connection
+// Ferme la connexion à la base de données
 mysqli_close($conn);
 ?>

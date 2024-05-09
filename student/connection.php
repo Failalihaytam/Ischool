@@ -1,11 +1,16 @@
 <?php
-$server_name = "localhost";
-$username = "root";
-$password ="";
-$database = "project";
+// Informations de connexion à la base de données
+$server_name = "localhost"; // Nom du serveur MySQL
+$username = "root"; // Nom d'utilisateur MySQL
+$password = ""; // Mot de passe MySQL
+$database = "project"; // Nom de la base de données
 
-$conn = mysqli_connect($server_name,$username,$password,$database);
+// Connexion à la base de données MySQL
+$conn = mysqli_connect($server_name, $username, $password, $database);
 
+// Vérifie si la connexion a réussi
 if (!$conn) {
-    die("Connection failed: ". mysqli_connect_error());
+    // Affiche un message d'erreur et arrête l'exécution du script en cas d'échec de connexion
+    die("La connexion a échoué : " . mysqli_connect_error());
 }
+?>

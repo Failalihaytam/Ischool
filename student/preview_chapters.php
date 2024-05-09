@@ -1,33 +1,33 @@
 <?php
 session_start();
 
-// Check if the user is logged in as a student
+// Vérifie si l'utilisateur est connecté en tant qu'étudiant
 if (!isset($_SESSION['student_id'])) {
-    header("Location: welcome.php"); // Redirect to welcome page if not logged in
+    header("Location: welcome.php"); // Redirige vers la page d'accueil si non connecté
     exit();
 }
 
-// Include database connection
+// Inclut la connexion à la base de données
 include_once "connection.php";
 
-// Check if class ID is provided in the URL
+// Vérifie si l'ID de classe est fourni dans l'URL
 if (isset($_GET['class_id'])) {
     $class_id = $_GET['class_id'];
 
-    // Fetch class details from database
+    // Récupère les détails de la classe depuis la base de données
     $class_query = "SELECT * FROM classes WHERE id = '$class_id'";
     $class_result = mysqli_query($conn, $class_query);
 
-    // Display class details
+    // Affiche les détails de la classe
     if (mysqli_num_rows($class_result) == 1) {
         $class_row = mysqli_fetch_assoc($class_result);
         echo "<h2>" . $class_row['class_name'] . "</h2>";
 
-        // Fetch chapters for the class from database
+        // Récupère les chapitres de la classe depuis la base de données
         $chapters_query = "SELECT * FROM chapters WHERE class_id = '$class_id'";
         $chapters_result = mysqli_query($conn, $chapters_query);
 
-        // Display chapters
+        // Affiche les chapitres
         if (mysqli_num_rows($chapters_result) > 0) {
             echo "<h3>Chapitres</h3>";
             while ($chapter_row = mysqli_fetch_assoc($chapters_result)) {
@@ -48,6 +48,6 @@ if (isset($_GET['class_id'])) {
     echo "Requête invalide.";
 }
 
-// Close database connection
+// Ferme la connexion à la base de données
 mysqli_close($conn);
 ?>
