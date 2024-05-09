@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-// Check if the user is logged in as a student
+// Vérifie si l'utilisateur est connecté en tant qu'étudiant
 if (!isset($_SESSION['student_id'])) {
-  header("Location: my_classes.php"); // Redirect to login page if not logged in
+  header("Location: my_classes.php"); // Redirige vers la page de connexion si l'utilisateur n'est pas connecté
   exit();
 }
 ?>
@@ -13,6 +13,7 @@ if (!isset($_SESSION['student_id'])) {
 
 <head>
   <style>
+    /* Styles pour la carte principale */
     .card {
       display: flex;
       flex-direction: column;
@@ -26,6 +27,7 @@ if (!isset($_SESSION['student_id'])) {
         -9px -9px 30px #ffffff;
     }
 
+    /* Styles pour le titre de la carte */
     .card h2 {
       font-size: 35px;
       text-align: start;
@@ -36,6 +38,7 @@ if (!isset($_SESSION['student_id'])) {
       text-shadow: 0 2px white, 0 3px #777;
     }
 
+    /* Styles pour le sous-titre de la carte */
     .card h3 {
       font-size: 22px;
       font-weight: 600;
@@ -43,6 +46,7 @@ if (!isset($_SESSION['student_id'])) {
       margin: 0px auto 30px auto;
     }
 
+    /* Styles pour le formulaire */
     .card form {
       display: flex;
       align-items: center;
@@ -101,6 +105,7 @@ if (!isset($_SESSION['student_id'])) {
       box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
     }
 
+    /* Styles pour les liens */
     .card .links {
       display: flex;
       width: 80%;
@@ -152,6 +157,7 @@ if (!isset($_SESSION['student_id'])) {
       box-shadow: 0 0 1em .25em var(--glow-color),
         0 0 4em 2em var(--glow-spread-color),
         inset 0 0 .75em .25em var(--glow-color);
+    }
   </style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -174,14 +180,14 @@ if (!isset($_SESSION['student_id'])) {
       </div>
       <div class="card">
         <?php
-        // Include database connection
+        // Inclure la connexion à la base de données
         include_once "connection.php";
 
-        // Check if the class ID is provided in the URL
+        // Vérifie si l'identifiant de la classe est fourni dans l'URL
         if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
           $class_id = $_GET['class_id'];
 
-          // Fetch class details from database
+          // Récupérer les détails de la classe depuis la base de données
           $class_query = "SELECT * FROM classes WHERE id = '$class_id'";
           $class_result = mysqli_query($conn, $class_query);
 
@@ -189,18 +195,19 @@ if (!isset($_SESSION['student_id'])) {
             $class_row = mysqli_fetch_assoc($class_result);
             echo "<h2>" . $class_row['class_name'] . "</h2>";
 
-            // Display form for sending messages
+            // Afficher le formulaire pour envoyer des messages
             echo "<h3>Envoyer un Message à l'Enseignant</h3>";
             echo "<form action='send_message.php' method='post'>";
             echo "<input type='hidden' name='class_id' value='" . $class_row['id'] . "'>";
             echo "<textarea name='message' placeholder='Tapez votre message ici' required></textarea><br>";
             echo "<input class='submit' type='submit' value='Envoyer le Message'>";
             echo "</form>";
+
+            // Liens vers d'autres pages de messagerie
             echo "<div class='links'>";
             echo "<a href='sent_messages.php?class_id=" . $class_row['id'] . "'>Messages Envoyés</a><br>";
             echo "<a href='inbox.php?class_id=" . $class_row['id'] . "'>Boîte de Réception</a><br>";
             echo "</div>";
-
           } else {
             echo "Cours non trouvé ou vous n'avez pas la permission de voir ce cours.";
           }
@@ -208,10 +215,9 @@ if (!isset($_SESSION['student_id'])) {
           echo "Requête invalide.";
         }
 
-        // Close database connection
+        // Fermer la connexion à la base de données
         mysqli_close($conn);
         ?>
-
       </div>
     </div>
   </div>
