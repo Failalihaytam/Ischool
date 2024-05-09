@@ -1,15 +1,16 @@
 <?php
 session_start();
 
-// Check if the user is logged in as a student
+// Vérifie si l'utilisateur est connecté en tant qu'étudiant
 if (!isset($_SESSION['student_id'])) {
-    header("Location: welcome.php"); // Redirect to welcome page if not logged in
+    header("Location: welcome.php"); // Redirige vers la page d'accueil si l'utilisateur n'est pas connecté
     exit();
 }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <!-- Styles CSS pour la mise en forme -->
   <style>
     .card {
       width: 800px;
@@ -85,19 +86,22 @@ if (!isset($_SESSION['student_id'])) {
       border-radius: 25px;
       box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
-    
+
   </style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Inclusion de la bibliothèque Font Awesome pour les icônes -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <?php 
+  <!-- Inclusion des ressources du tableau de bord -->
+  <?php
     require_once "dashbord_head.html";
   ?>
   <title>Mes Cours</title>
 </head>
 <body>
   <div class="container">
-    <?php 
+    <!-- Inclusion du contenu du tableau de bord -->
+    <?php
       require_once "dashbord_body.html";
     ?>
     <div class="main">
@@ -108,17 +112,17 @@ if (!isset($_SESSION['student_id'])) {
       </div>
       <div class="card">
         <?php
-            // Include database connection
+            // Inclusion de la connexion à la base de données
             include_once "connection.php";
 
-            // Get student ID from session
+            // Récupération de l'identifiant de l'étudiant depuis la session
             $student_id = $_SESSION['student_id'];
 
-            // Fetch enrolled classes for the student from database
+            // Récupération des cours auxquels l'étudiant est inscrit depuis la base de données
             $enrolled_query = "SELECT classes.id, classes.class_name FROM enrollment INNER JOIN classes ON enrollment.class_id = classes.id WHERE enrollment.student_id = '$student_id'";
             $enrolled_result = mysqli_query($conn, $enrolled_query);
 
-            // Display enrolled classes as links
+            // Affichage des cours auxquels l'étudiant est inscrit sous forme de liens
             if (mysqli_num_rows($enrolled_result) > 0) {
                 echo "<h2>Vos Cours</h2>";
                 echo "<div class='cours'>";
@@ -133,15 +137,15 @@ if (!isset($_SESSION['student_id'])) {
                 echo "<p class='message'>Vous n'êtes inscrit à aucun cours</p>";
             }
 
-            // Close database connection
+            // Fermeture de la connexion à la base de données
             mysqli_close($conn);
             ?>
       </div>
     </div>
   </div>
 </body>
-<?php 
+<!-- Inclusion des scripts JavaScript pour le tableau de bord -->
+<?php
   require_once "dashboard_script.html";
 ?>
 </html>
-
