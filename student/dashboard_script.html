@@ -1,25 +1,27 @@
 <script>
-    // add hovered class to selected list tem
+  // Fonction pour activer le lien survolé en ajoutant la classe "hovered"
 let list = document.querySelectorAll(".navigation li");
 
 function activeLink() {
-  list.forEach(item=>{
-    item.classList.remove("hovered");
-  });
-  this.classList.add("hovered");
+// Supprime la classe "hovered" de tous les éléments de liste
+list.forEach(item=>{
+  item.classList.remove("hovered");
+});
+// Ajoute la classe "hovered" à l'élément de liste survolé
+this.classList.add("hovered");
 }
 
-
+// Écouteurs d'événements pour le survol des éléments de liste
 list.forEach(item => item.addEventListener("mouseover", activeLink));
 
-// menu toggle
+// Fonction pour basculer le menu
 let toggle = document.querySelector(".toggle");
 let navigation = document.querySelector(".navigation");
 let main = document.querySelector(".main");
 
 toggle.onclick = function() {
-  navigation.classList.toggle("active");
-  main.classList.toggle("active");
+// Bascule la classe "active" du menu de navigation et de la section principale
+navigation.classList.toggle("active");
+main.classList.toggle("active");
 }
 </script>
-
