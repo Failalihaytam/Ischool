@@ -1,20 +1,20 @@
 <?php
 session_start();
 
-// Check if the user is logged in as a student
+// Vérifie si l'utilisateur est connecté en tant qu'étudiant
 if (!isset($_SESSION['student_id'])) {
-    header("Location: welcome.php"); // Redirect to welcome page if not logged in
+    header("Location: welcome.php"); // Redirige vers la page d'accueil si non connecté
     exit();
 }
 
-// Include database connection
+// Inclut la connexion à la base de données
 include_once "connection.php";
 
-// Check if the class ID is provided in the URL
+// Vérifie si l'ID de classe est fourni dans l'URL
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
     $class_id = $_GET['class_id'];
 
-    // Fetch class details from database
+    // Récupère les détails de la classe depuis la base de données
     $class_query = "SELECT * FROM classes WHERE id = '$class_id'";
     $class_result = mysqli_query($conn, $class_query);
 
@@ -39,11 +39,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
         echo "<div class='container'>";
         echo "<h2>Annonces de " . $class_row['class_name'] . "</h2>";
 
-        // Fetch announcements for the specified class ID
+        // Récupère les annonces pour l'ID de classe spécifié
         $announcements_query = "SELECT * FROM announcements WHERE class_id = '$class_id'";
         $announcements_result = mysqli_query($conn, $announcements_query);
 
-        // Display announcements
+        // Affiche les annonces
         if ($announcements_result && mysqli_num_rows($announcements_result) > 0) {
             while ($announcement_row = mysqli_fetch_assoc($announcements_result)) {
                 echo "<div class='announcement'>";
@@ -55,16 +55,16 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
             echo "<p>Aucune annonce pour le moment.</p>";
         }
 
-        echo "</div>"; // Close container
+        echo "</div>"; // Ferme le conteneur
         echo "</body>";
         echo "</html>";
     } else {
         echo "Cours non trouvé ou vous n'avez pas la permission de voir les annonces pour ce cours.";
-    }   
+    }
 } else {
     echo "Requête invalide.";
 }
 
-// Close database connection
+// Ferme la connexion à la base de données
 mysqli_close($conn);
 ?>
