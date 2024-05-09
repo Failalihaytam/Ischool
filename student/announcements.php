@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-// Check if the user is logged in as a student
+// Vérifie si l'utilisateur est connecté en tant qu'étudiant
 if (!isset($_SESSION['student_id'])) {
-  header("Location: welcome.php"); // Redirect to welcome page if not logged in
+  header("Location: welcome.php"); // Redirige vers la page d'accueil si non connecté
   exit();
 }
 ?>
@@ -89,7 +89,7 @@ if (!isset($_SESSION['student_id'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php
-  require_once "dashbord_head.html";
+  require_once "dashbord_head.html"; // Inclut le code du head
   ?>
   <title>Annonce</title>
 </head>
@@ -97,7 +97,7 @@ if (!isset($_SESSION['student_id'])) {
 <body>
   <div class="container">
     <?php
-    require_once "dashbord_body.html";
+    require_once "dashbord_body.html"; // Inclut le code du body
     ?>
     <div class="main">
       <div class="topbar">
@@ -107,14 +107,14 @@ if (!isset($_SESSION['student_id'])) {
       </div>
       <div class="card">
         <?php
-        // Include database connection
+        // Inclut la connexion à la base de données
         include_once "connection.php";
 
-        // Check if the class ID is provided in the URL
+        // Vérifie si l'ID de la classe est fourni dans l'URL
         if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
           $class_id = $_GET['class_id'];
 
-          // Fetch class details from database
+          // Récupère les détails de la classe depuis la base de données
           $class_query = "SELECT * FROM classes WHERE id = '$class_id'";
           $class_result = mysqli_query($conn, $class_query);
 
@@ -123,11 +123,11 @@ if (!isset($_SESSION['student_id'])) {
             echo "<body>";
             echo "<h2>Annonces de " . $class_row['class_name'] . "</h2>";
 
-            // Fetch announcements for the specified class ID
+            // Récupère les annonces pour l'ID de classe spécifié
             $announcements_query = "SELECT * FROM announcements WHERE class_id = '$class_id'";
             $announcements_result = mysqli_query($conn, $announcements_query);
 
-            // Display announcements
+            // Affiche les annonces
             if ($announcements_result && mysqli_num_rows($announcements_result) > 0) {
               while ($announcement_row = mysqli_fetch_assoc($announcements_result)) {
                 echo "<div class='announcement'>";
@@ -148,7 +148,7 @@ if (!isset($_SESSION['student_id'])) {
           echo "Requête invalide.";
         }
 
-        // Close database connection
+        // Ferme la connexion à la base de données
         mysqli_close($conn);
         ?>
 
@@ -157,7 +157,7 @@ if (!isset($_SESSION['student_id'])) {
   </div>
 </body>
 <?php
-require_once "dashboard_script.html";
+require_once "dashboard_script.html"; // Inclut le script JavaScript
 ?>
 
 </html>
