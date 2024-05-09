@@ -37,16 +37,108 @@ if ($result && mysqli_num_rows($result) > 0) {
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <style>
+    .card {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 30px 80px;
+      border: 2px solid #c4c4c4;
+      border-radius: 20px;
+      background: #d8dfed;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+
+    }
+
+    .card h1 {
+      font-size: 50px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #010d24;
+    }
+
+    .card .profile_card {
+      display: flex;
+      justify-content: end;
+      flex-direction: column;
+      align-items: center;
+      text-align: start;
+      gap: 20px;
+      padding: 25px;
+    }
+    .profile_card p {
+      margin-top: 10px;
+      font-weight: 500;
+      font-size: 23px;
+      color: #0b0c21;
+    }
+
+    .profile_card .links {
+      padding: 30px 20px;
+      display: flex;
+      gap: 20px;
+      flex-direction: column;
+    }
+
+    .profile_card strong {
+      text-transform: capitalize;
+      margin-right: 8px;
+      color: #010d24;
+    }
+
+    .profile_card a {
+      text-decoration: none;
+      margin: 8px auto;
+      padding: 17px 40px;
+      border-radius: 50px;
+      cursor: pointer;
+      border: 0;
+      color: #162155;
+      background-color: white;
+      box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-size: 15px;
+      transition: all 0.5s ease;
+    }
+
+
+    .profile_card a:hover {
+      background-color: hsl(261deg 80% 48%);
+      transform: scale(1.1);
+      color: hsl(0, 0%, 100%);
+      box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+    }
+
+    .profile_card p {
+
+    }
+
+  </style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?php 
+    require_once "dashbord_head.html";
+  ?>
   <title>Profil</title>
 </head>
 <body>
   <div class="container">
-    <h2>Informations de Profil</h2>
-    <p><strong>Prénom :</strong> <?php echo $firstname; ?></p>
-    <p><strong>Nom :</strong> <?php echo $lastname; ?></p>
-    <p><strong>Email :</strong> <?php echo $email; ?></p>
+    <?php 
+      require_once "dashbord_body.html";
+    ?>
+    <div class="main">
+      <div class="topbar">
+        <div class="toggle">
+          <ion-icon name="menu-outline"></ion-icon>
+        </div>
+      </div>
+      <div class="card">
+      <h1>Informations de Profil</h1>
+      <div class="profile_card">
+      <p><strong>Prénom :</strong> <?php echo $firstname; ?></p>
+      <p><strong>Nom :</strong> <?php echo $lastname; ?></p>
+      <p><strong>Email :</strong> <?php echo $email; ?></p>
+      <div class="links">
     <a href="edit_profile.php">Modifier le Profil</a>
     <?php
       if ($result1 && mysqli_num_rows($result1) > 0) {
@@ -55,6 +147,13 @@ if ($result && mysqli_num_rows($result) > 0) {
         echo "<a href='delete_profile.php'>Supprimer le Profil</a>";
       }
     ?>
+      </div>
+      </div>
+      </div>
+    </div>
   </div>
 </body>
+<?php 
+  require_once "dashboard_script.html";
+?>
 </html>

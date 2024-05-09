@@ -54,13 +54,16 @@ mysqli_close($conn);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?php
+    require_once "dashbord_head.html";
+  ?>
   <title>Teacher Information</title>
   <style>
     body {
       font-family: Arial, sans-serif;
     }
 
-    .container {
+    .card {
       max-width: 600px;
       margin: 50px auto;
       padding: 20px;
@@ -85,6 +88,16 @@ mysqli_close($conn);
 </head>
 <body>
   <div class="container">
+  <?php
+    require_once "dashbord_body.html";
+    ?>
+    <div class="main">
+      <div class="topbar">
+        <div class="toggle">
+          <ion-icon name="menu-outline"></ion-icon>
+        </div>
+      </div>
+      <div class="card">
     <h2>Teacher Information</h2>
 
     <div class="teacher-details">
@@ -106,4 +119,7 @@ mysqli_close($conn);
     <a href="teachers.php">Back to Teachers List</a>
   </div>
 </body>
+<?php
+  require_once "dashboard_script.html";
+?>
 </html>

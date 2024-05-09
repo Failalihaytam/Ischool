@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['chapter_id']) && isset
     // Check if the file is a PDF
     $file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
     if (strtolower($file_ext) != "pdf") {
-        echo "Erreur : seuls les fichiers PDF sont autorisés.";
+        echo "Erreur : seuls les fichiers PDF sont autorisés.";
         exit();
     }
 
@@ -42,30 +42,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['chapter_id']) && isset
     }
 } else {
     // Include HTML form if no form submission
-    ?>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Importer Un Chapitre</title>
-    </head>
-    <body>
-        <h2>Importer Un Chapitre</h2>
-        <form action="update_chapter.php" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="chapter_id" value="<?php echo $_GET['chapter_id']; ?>">
-            <input type="hidden" name="class_id" value="<?php echo $_GET['class_id']; ?>"> <!-- Get chapter_id from URL -->
-            <label for="new_chapter_name">Intitulé Du Chapitre:</label>
-            <input type="text" id="new_chapter_name" name="new_chapter_name" required><br><br>
-
-            <label for="new_chapter_file">Importer Un PDF:</label>
-            <input type="file" id="new_chapter_file" name="new_chapter_file" accept=".pdf" required><br><br>
-
-            <input type="submit" value="Importer">
-        </form>
-    </body>
-    </html>
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php
+    require_once "dashbord_head.html";
+    ?>
+    <title>Importer Un Chapitre</title>
+    <style>
+    .card {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    </style>
+</head>
+<body>
+<div class="container">
+    <?php
+    require_once "dashbord_body.html";
+    ?>
+    <div class="main">
+      <div class="topbar">
+        <div class="toggle">
+          <ion-icon name="menu-outline"></ion-icon>
+        </div>
+      </div>
+      <div class="card">
+    <h2>Importer Un Chapitre</h2>
+    <form action="update_chapter.php" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="chapter_id" value="<?php echo $_GET['chapter_id']; ?>">
+        <input type="hidden" name="class_id" value="<?php echo $_GET['class_id']; ?>"> <!-- Get chapter_id from URL -->
+        <label for="new_chapter_name">Intitulé Du Chapitre:</label>
+        <input type="text" id="new_chapter_name" name="new_chapter_name" required><br><br>
+
+        <label for="new_chapter_file">Importer Un PDF:</label>
+        <input type="file" id="new_chapter_file" name="new_chapter_file" accept=".pdf" required><br><br>
+
+        <input type="submit" value="Importer">
+    </form>
+</div>
+</body>
+<?php
+  require_once "dashboard_script.html";
+?>
+</html>
+<?php
 }
 
 // Close database connection

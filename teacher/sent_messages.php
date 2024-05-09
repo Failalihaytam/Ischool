@@ -20,8 +20,42 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
 
     if ($class_result && mysqli_num_rows($class_result) > 0) {
         $class_row = mysqli_fetch_assoc($class_result);
-        echo "<h2>Les Messages Envoyés</h2>";
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php
+    require_once "dashbord_head.html";
+    ?>
+    <title>Les Messages Envoyés</title>
+    <style>
+        .card {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+  <?php
+    require_once "dashbord_body.html";
+    ?>
+    <div class="main">
+      <div class="topbar">
+        <div class="toggle">
+          <ion-icon name="menu-outline"></ion-icon>
+        </div>
+      </div>
+      <div class="card">
+<h2>Les Messages Envoyés</h2>
 
+<?php
         // Fetch messages and replies for this class
         $messages_query = "SELECT m.m_id AS message_id, m.sent_at, m.message_content, s.firstname, s.lastname, r.reply_message, r.replied_at
             FROM messages m
@@ -32,21 +66,30 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
 
         if ($messages_result && mysqli_num_rows($messages_result) > 0) {
             while ($message_row = mysqli_fetch_assoc($messages_result)) {
-                echo "<div>";
-                echo "<p><strong>De:</strong> " . $message_row['firstname'] . " " . $message_row['lastname'] ."</p>";
-                echo "<p><strong>Envoyé le:</strong> " . $message_row['sent_at'] . "</p>";
-                echo "<p><strong>Message:</strong> " . $message_row['message_content'] . "</p>";
-                if ($message_row['reply_message']) {
-                    echo "<p><strong>Réponse du Professeur:</strong> " . $message_row['reply_message'] . "</p>";
-                    echo "<p><strong>Envoyé le:</strong> " . $message_row['replied_at'] . "</p>";
-                } else {
-                    echo "<p>Pas encore de réponse.</p>";
-                }
-                echo "</div>";
+?>
+<div>
+    <p><strong>De:</strong> <?php echo $message_row['firstname'] . " " . $message_row['lastname']; ?></p>
+    <p><strong>Envoyé le:</strong> <?php echo $message_row['sent_at']; ?></p>
+    <p><strong>Message:</strong> <?php echo $message_row['message_content']; ?></p>
+    <?php if ($message_row['reply_message']) { ?>
+    <p><strong>Réponse du Professeur:</strong> <?php echo $message_row['reply_message']; ?></p>
+    <p><strong>Envoyé le:</strong> <?php echo $message_row['replied_at']; ?></p>
+    <?php } else { ?>
+    <p>Pas encore de réponse.</p>
+    <?php } ?>
+</div>
+<?php
             }
         } else {
             echo "<p>Aucun message avec réponse trouvé.</p>";
         }
+?>
+</body>
+<?php
+  require_once "dashboard_script.html";
+?>
+</html>
+<?php
     } else {
         echo "Classe introuvable ou vous n'êtes pas autorisé à voir les élèves de cette classe.";
     }

@@ -39,10 +39,33 @@ if ($result && mysqli_num_rows($result) > 0) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?php
+    require_once "dashbord_head.html";
+  ?>
   <title>Profil</title>
+  <style>
+    .card {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    </style>
 </head>
 <body>
   <div class="container">
+  <?php
+    require_once "dashbord_body.html";
+    ?>
+    <div class="main">
+      <div class="topbar">
+        <div class="toggle">
+          <ion-icon name="menu-outline"></ion-icon>
+        </div>
+      </div>
+      <div class="card">
     <h2>Informations Du Profil</h2>
     <p><strong>Prenom:</strong> <?php echo $firstname; ?></p>
     <p><strong>Nom:</strong> <?php echo $lastname; ?></p>
@@ -57,4 +80,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     ?>
   </div>
 </body>
+<?php
+  require_once "dashboard_script.html";
+?>
 </html>

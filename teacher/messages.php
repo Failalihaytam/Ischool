@@ -20,11 +20,51 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
 
     if ($class_result && mysqli_num_rows($class_result) > 0) {
         $class_row = mysqli_fetch_assoc($class_result);
-        echo "<h2>" . $class_row['class_name'] . "</h2>";
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php
+    require_once "dashbord_head.html";
+    ?>
+    <title><?php echo $class_row['class_name']; ?></title>
+    <style>
+    .card {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    </style>
+</head>
+<body>
+<div class="container">
+  <?php
+    require_once "dashbord_body.html";
+    ?>
+    <div class="main">
+      <div class="topbar">
+        <div class="toggle">
+          <ion-icon name="menu-outline"></ion-icon>
+        </div>
+      </div>
+      <div class="card">
+    <h2><?php echo $class_row['class_name']; ?></h2>
 
-        // Link to Inbox and Sent Messages
-        echo "<a href='inbox.php?class_id=" . $class_row['id'] . "'>Boîte de réception</a><br>";
-        echo "<a href='sent_messages.php?class_id=" . $class_row['id'] . "'>Messages envoyés</a><br>";
+    <!-- Link to Inbox and Sent Messages -->
+    <a href='inbox.php?class_id=<?php echo $class_row['id']; ?>'>Boîte de réception</a><br>
+    <a href='sent_messages.php?class_id=<?php echo $class_row['id']; ?>'>Messages envoyés</a><br>
+</div>
+</body>
+<?php
+  require_once "dashboard_script.html";
+?>
+</html>
+<?php
     } else {
         echo "Cours introuvable ou vous n'êtes pas autorisé à afficher ce cours.";
     }

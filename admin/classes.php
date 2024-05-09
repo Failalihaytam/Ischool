@@ -81,7 +81,6 @@ if ($result && mysqli_num_rows($result) > 0) {
       <?php endforeach; ?>
     </ul>
 
-    <a href="welcome.php">Back to Dashboard</a>
       </div>
     </div>
     

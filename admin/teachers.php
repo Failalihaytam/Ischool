@@ -94,7 +94,6 @@ mysqli_close($conn);
       ?>
     </ul>
 
-    <a href="welcome.php">Back to Dashboard</a>
   </div>
     </div>
   </div>
