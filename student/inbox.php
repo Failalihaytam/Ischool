@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-// Check if the user is logged in as a student
+// Vérifie si l'utilisateur est connecté en tant qu'étudiant
 if (!isset($_SESSION['student_id'])) {
-  header("Location: my_classes.php"); // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+  header("Location: my_classes.php"); // Redirige vers la page de connexion si l'utilisateur n'est pas connecté
   exit();
 }
 ?>
@@ -13,6 +13,7 @@ if (!isset($_SESSION['student_id'])) {
 
 <head>
   <style>
+    /* Styles pour la carte principale */
     .card {
       display: flex;
       flex-direction: column;
@@ -26,6 +27,7 @@ if (!isset($_SESSION['student_id'])) {
         -9px -9px 30px #ffffff;
     }
 
+    /* Styles pour le titre de la carte */
     .card h2 {
       font-size: 35px;
       text-align: start;
@@ -36,6 +38,7 @@ if (!isset($_SESSION['student_id'])) {
       text-shadow: 0 2px white, 0 3px #777;
     }
 
+    /* Styles pour le message */
     .message {
       font-size: 20px;
       font-weight: 500;
@@ -46,6 +49,7 @@ if (!isset($_SESSION['student_id'])) {
       box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     }
 
+    /* Styles pour la boîte de réception */
     .card .inbox {
       display: flex;
       width: 90%;
@@ -58,6 +62,7 @@ if (!isset($_SESSION['student_id'])) {
       box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.5);
     }
 
+    /* Styles pour la date */
     .card .inbox .date {
       background: #000036;
       color: #fff;
@@ -70,10 +75,12 @@ if (!isset($_SESSION['student_id'])) {
       box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.4);
     }
 
+    /* Styles pour le span à l'intérieur de la date */
     .inbox .date span {
       margin-right: 20px;
     }
 
+    /* Styles pour les éléments en gras */
     .inbox strong {
       font-size: 20px;
       font-weight: 600;
@@ -82,13 +89,13 @@ if (!isset($_SESSION['student_id'])) {
       margin: 10px 0;
     }
 
+    /* Styles pour les paragraphes */
     .inbox p {
       font-size: 16px;
       font-weight: 500;
       letter-spacing: 1px;
       margin: 10px 30px;
     }
-
   </style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -113,11 +120,11 @@ if (!isset($_SESSION['student_id'])) {
         <?php
         include_once "connection.php";
 
-        // Check if the class ID is provided in the URL
+        // Vérifie si l'identifiant de la classe est fourni dans l'URL
         if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
           $class_id = $_GET['class_id'];
 
-          // Fetch messages and replies from the database
+          // Récupère les messages et les réponses depuis la base de données
           $messages_query = "SELECT messages.*, replies.reply_message, replies.replied_at
                                 FROM messages
                                 INNER JOIN replies ON messages.m_id = replies.message_id
@@ -142,7 +149,7 @@ if (!isset($_SESSION['student_id'])) {
           echo "Requête invalide.";
         }
 
-        // Close database connection
+        // Ferme la connexion à la base de données
         mysqli_close($conn);
         ?>
       </div>
