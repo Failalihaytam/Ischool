@@ -1,9 +1,10 @@
 <?php
 session_start();
 
-// Check if the user is logged in as a teacher
+// Vérifie si l'utilisateur est connecté en tant qu'enseignant
 if (!isset($_SESSION['student_id'])) {
-    header("Location: my_classes.php"); // Redirect to login page if not logged in
+    // Redirige vers la page de connexion si non connecté
+    header("Location: my_classes.php");
     exit();
 }
 ?>
@@ -11,6 +12,7 @@ if (!isset($_SESSION['student_id'])) {
 <html lang="fr">
 <head>
   <style>
+    /* Styles pour la carte */
     .card {
       display: flex;
       flex-direction: column;
@@ -24,6 +26,7 @@ if (!isset($_SESSION['student_id'])) {
                   -9px -9px 30px #ffffff;
     }
 
+    /* Styles pour le titre */
     .card h2 {
       font-size: 35px;
       text-align: start;
@@ -33,7 +36,8 @@ if (!isset($_SESSION['student_id'])) {
       text-transform: uppercase;
       text-shadow: 0 2px white, 0 3px #777;
     }
-    
+
+    /* Styles pour les sous-titres */
     .card span {
       font-size: 28px;
       font-weight: 600;
@@ -42,6 +46,7 @@ if (!isset($_SESSION['student_id'])) {
       text-shadow: 0 2px white, 0 3px #777;
     }
 
+    /* Styles pour le paragraphe */
     .card p {
       width: 450px;
       background: #FCFCFC;
@@ -59,10 +64,12 @@ if (!isset($_SESSION['student_id'])) {
       transition: .5s ease;
     }
 
+    /* Styles pour le paragraphe lors du survol */
     .card p:hover {
       transform: scale(1.05);
     }
 
+    /* Styles pour les liens */
     .card a {
       text-decoration: none;
       margin: 8px auto;
@@ -79,26 +86,25 @@ if (!isset($_SESSION['student_id'])) {
       transition: all 0.5s ease;
     }
 
-
+    /* Styles pour les liens lors du survol */
     .card a:hover {
       letter-spacing: 3px;
       background-color: hsl(261deg 80% 48%);
       color: hsl(0, 0%, 100%);
       box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
     }
-
   </style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <?php 
-    require_once "dashbord_head.html";
+  <?php
+    require_once "dashbord_head.html"; // Inclut le contenu du head
   ?>
   <title>Details du cours</title>
 </head>
 <body>
   <div class="container">
-    <?php 
-      require_once "dashbord_body.html";
+    <?php
+      require_once "dashbord_body.html"; // Inclut le contenu du body
     ?>
     <div class="main">
       <div class="topbar">
@@ -108,14 +114,14 @@ if (!isset($_SESSION['student_id'])) {
       </div>
       <div class="card">
       <?php
-        // Include database connection
+        // Inclut la connexion à la base de données
         include_once "connection.php";
 
-        // Check if the class ID is provided in the URL
+        // Vérifie si l'ID du cours est fourni dans l'URL
         if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['class_id'])) {
             $class_id = $_GET['class_id'];
 
-            // Fetch class details from database
+            // Récupère les détails du cours depuis la base de données
             $class_query = "SELECT * FROM classes WHERE id = '$class_id'";
             $class_result = mysqli_query($conn, $class_query);
 
@@ -129,12 +135,12 @@ if (!isset($_SESSION['student_id'])) {
                 echo "<a href='messages.php?class_id=" . $class_row['id'] . "'>Messages</a><br>";
             } else {
                 echo "Cours non trouvé ou vous n'avez pas la permission de voir ce cours.";
-            }   
+            }
         } else {
             echo "Requête invalide.";
         }
 
-        // Close database connection
+        // Ferme la connexion à la base de données
         mysqli_close($conn);
         ?>
 
@@ -142,7 +148,7 @@ if (!isset($_SESSION['student_id'])) {
     </div>
   </div>
 </body>
-<?php 
-  require_once "dashboard_script.html";
+<?php
+  require_once "dashboard_script.html"; // Inclut le script JavaScript
 ?>
 </html>
